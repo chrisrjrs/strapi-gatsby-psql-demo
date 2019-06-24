@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
+import ReactMarkdown from 'react-markdown'
 
 const UserTemplate =  ({ data }) => (
     <Layout>
@@ -9,7 +10,12 @@ const UserTemplate =  ({ data }) => (
         {data.strapiUser.articles.map(article => (
             <li key={article.id}>
                 <h2><Link to={`/Article_${article.id}`}>{article.title}</Link></h2>
-                <p>{article.content}</p>
+                <ReactMarkdown 
+                  source={article.contentsubstring(0, 500).concat("...")}
+                  transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}
+                  className="indexArticle"
+                  escapeHTML={false}
+                  />
             </li>
         ))}
         </ul>
