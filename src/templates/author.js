@@ -11,7 +11,7 @@ const UserTemplate =  ({ data }) => (
             <li key={article.id}>
                 <h2><Link to={`/Article_${article.id}`}>{article.title}</Link></h2>
                 <ReactMarkdown 
-                  source={article.contentsubstring(0, 500).concat("...")}
+                  source={article.content.substring(0, 500).concat("...")}
                   transformImageUri={uri => uri.startsWith('http') ? uri : `${process.env.IMAGE_BASE_URL}${uri}`}
                   className="indexArticle"
                   escapeHTML={false}
